@@ -120,31 +120,23 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCases( RBNode<T> X )
 	{
-		// A MODIFIER/COMPLÉTER
-		if(root==null){
-		//	RBNode<T> x2= new RBNode<T>();
-			//x2.value=X.value;
-			//root=x2;
-		/*	root =new RBNode<T>();
-			root.leftChild=X.leftChild;
-			root.rightChild=X.rightChild;
-			root.parent=null;
-			root.value=X.value;*/
-			root = X;
-			root.setToBlack();
-		}
-		
-		//insertionCase1( X );
+		insertionCase1( X );
 	}
 
 	private void insertionCase1 ( RBNode<T> X )
 	{
-		// A MODIFIER/COMPLÉTER
+		if(root==X)
+		{
+			root.setToBlack();
+			return;
+		}
+		
 		insertionCase2( X );
 	}
 
 	private void insertionCase2( RBNode<T> X )
 	{
+		System.out.println("YAYAY");
 		// A MODIFIER/COMPLÉTER
 		insertionCase3( X );
 	}

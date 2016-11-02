@@ -15,10 +15,11 @@ public class RedBlackTreeMain
 		for(int i=0; i<val.length; i++)
 		{
 			t.insert(val[i]);
+			System.out.println(t.getHauteur());
 		}
 		// Afficher l'arbre binaire
 		System.out.println("PreOrdre Arbre de recherche binaire :( " + t.printTreePreOrder()+ "\n");
-/*
+
 		// Creation de l'arbre
 		RedBlackTree<Integer> tree = new RedBlackTree<Integer>();
 
@@ -32,7 +33,7 @@ public class RedBlackTreeMain
 			tree.printFancyTree();
 			System.out.println();
 		}
-
+		/*
 		// Verifier find()
 		Integer n = tree.find(20);
 		System.out.print("Recherche valeur 20 : ");
