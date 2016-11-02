@@ -43,8 +43,21 @@ public class Tree<AnyType> {
 	}
 
 	private int getHauteur(Node<AnyType> tree) {
-		return 0;
-		// A compléter 
+	    if (tree == null)
+	    {
+	        return 0;
+	    }
+	    else
+	    {
+	    	int hauteur = 1;
+	    	int hLeft= getHauteur(tree.getLeft());
+	    	int hRight= getHauteur(tree.getRight());
+	    	if(hLeft>hRight)
+	    		hauteur+=hLeft;
+	    	else
+	    		hauteur+=hRight;
+	    	return hauteur;
+	    } 
 
 	}
 
