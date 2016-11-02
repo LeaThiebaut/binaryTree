@@ -2,6 +2,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class RedBlackTree<T extends Comparable<? super T> > 
 {
 	private RBNode<T> root;  // Racine de l'arbre
@@ -120,7 +121,20 @@ public class RedBlackTree<T extends Comparable<? super T> >
 	private void insertionCases( RBNode<T> X )
 	{
 		// A MODIFIER/COMPLÉTER
-		insertionCase1( X );
+		if(root==null){
+		//	RBNode<T> x2= new RBNode<T>();
+			//x2.value=X.value;
+			//root=x2;
+		/*	root =new RBNode<T>();
+			root.leftChild=X.leftChild;
+			root.rightChild=X.rightChild;
+			root.parent=null;
+			root.value=X.value;*/
+			root = X;
+			root.setToBlack();
+		}
+		
+		//insertionCase1( X );
 	}
 
 	private void insertionCase1 ( RBNode<T> X )
