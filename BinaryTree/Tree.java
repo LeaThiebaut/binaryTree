@@ -3,6 +3,7 @@ package BinaryTree;
 public class Tree<AnyType> {
 
 	private Node<AnyType> root = null; // Racine de l'arbre
+	//private boolean firstToPrint = true;	//To print without the unecessary  , 
 
 	public void insert (AnyType elem) {
 		Node<AnyType> newElem = new Node<AnyType>(elem);
@@ -62,6 +63,7 @@ public class Tree<AnyType> {
 	}
 
 	public String printTreePreOrder() {
+		//firstToPrint=true;
 		return "{"+this.printPreOrder(root) + "}";
 
 	}
@@ -70,8 +72,15 @@ public class Tree<AnyType> {
 		String results = "";
 	    if (root != null) {
 	    	results+=printPreOrder(root.getLeft());
-	    	results+=root.toString();
-		    results+=printPreOrder(root.getRight());
+	    	//To print without the unecessary ,
+	    	/*if(firstToPrint){
+	    		results+=root.toString();
+	    		firstToPrint=false;}
+	    	else
+	    	 	results+=", "+root.toString();
+	    	 */
+	    		results+=root.toString()+", ";
+	    	results+=printPreOrder(root.getRight());
 		    }
 		return results;
 		
