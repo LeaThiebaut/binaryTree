@@ -51,8 +51,23 @@ public class RedBlackTree<T extends Comparable<? super T> >
 	}
 
 	private T find(RBNode<T> current, int key)
-	{
-		// À COMPLÉTER
+	{	
+		//System.out.print(current.value+"\n");
+	    
+		if (current.value == null)
+	        return null;
+	    
+		else if ((int)current.value==key)
+	        return current.value;
+	    
+		else if (((int)current.value<key)&&(current.rightChild!=null))
+	        return find(current.rightChild,key);
+	    
+		else if (((int)current.value>key)&&(current.leftChild!=null))
+	        return find(current.leftChild,key);
+	    
+		else 
+	    	return null;
 	}
 
 	public int getHauteur() {
@@ -62,11 +77,26 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 
 	private int getHauteur(RBNode<T> tree) {
-		if (tree == null) {
+		if (tree == null)
+		{
 			return 0;
 		}
-
-		// À COMPLÉTER
+		else
+		{
+			//Ne pas compter les feuilles
+			if (tree.value == null)
+			{
+				return 0;
+			}
+			int hauteur = 1;
+			int hLeft= getHauteur(tree.leftChild);
+			int hRight= getHauteur(tree.rightChild);
+			if(hLeft>hRight)
+				hauteur+=hLeft;
+			else
+				hauteur+=hRight;
+			return hauteur;
+		} 
 
 	}
 
@@ -165,6 +195,8 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		{
 			if(X==X.parent.leftChild&&X.parent==X.grandParent().rightChild)
 			{
+				rotateLeft(X);
+				/*
 				//Stock du parent
 				RBNode<T> tmp = X.parent;
 				//grand parent prend le petit fils en tant que fils
@@ -173,18 +205,21 @@ public class RedBlackTree<T extends Comparable<? super T> >
 				//Parent recup fils du fils et devient fils de l'ancien fils
 				tmp.leftChild=X.rightChild;
 				X.rightChild=tmp;
+				*/
 				//Verif cas 5 sur le new fils
 				insertionCase5(X.rightChild);
 			}
 			else if(X==X.parent.rightChild&&X.parent==X.grandParent().leftChild)
 			{
-				System.out.println("Y44444444444444AYAY");
+				rotateRight(X);
+				/*
 				RBNode<T> tmp = X.parent;
 				X.grandParent().leftChild=X;
 				X.parent=X.grandParent();
 				tmp.rightChild=X.leftChild;
 				X.leftChild=tmp;
 				X.leftChild.parent=X;
+				*/
 				insertionCase5(X.leftChild);
 			}
 			//Si pas cas 4 mais rentre dans uncle/parent rouge/noir alors cas 5
@@ -229,7 +264,6 @@ public class RedBlackTree<T extends Comparable<? super T> >
 				X.grandParent().parent=X.parent;
 				X.parent.rightChild=X.grandParent();
 				X.parent.parent=X.grandParent().parent;
-				
 			}
 		}
 		return; 
@@ -237,16 +271,26 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void rotateLeft( RBNode<T> G )
 	{
-		// A MODIFIER/COMPLÉTER
+		RBNode<T> tmp = G.parent;
+		//grand parent prend le petit fils en tant que fils
+		G.grandParent().rightChild=G;
+		G.parent=G.grandParent();
+		//Parent recup fils du fils et devient fils de l'ancien fils
+		tmp.leftChild=G.rightChild;
+		G.rightChild=tmp;
 		return; 
 	}
 
 	private void rotateRight( RBNode<T> G )
 	{
-		// A MODIFIER/COMPLÉTER
+		RBNode<T> tmp = G.parent;
+		G.grandParent().leftChild=G;
+		G.parent=G.grandParent();
+		tmp.rightChild=G.leftChild;
+		G.leftChild=tmp;
+		G.leftChild.parent=G;
 		return; 
 	}
-
 	public void printTreePreOrder()
 	{
 		if(root == null)

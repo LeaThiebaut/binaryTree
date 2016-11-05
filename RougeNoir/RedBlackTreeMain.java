@@ -33,7 +33,7 @@ public class RedBlackTreeMain
 			tree.printFancyTree();
 			System.out.println();
 		}
-		/*
+
 		// Verifier find()
 		Integer n = tree.find(20);
 		System.out.print("Recherche valeur 20 : ");
@@ -50,7 +50,7 @@ public class RedBlackTreeMain
 			System.out.println("Noeud introuvable.");
 
 		System.out.println();
-
+		/*
 		// Affichage pre-ordre et post-ordre
 		tree.printTreePreOrder();
 		tree.printTreePostOrder();
@@ -59,12 +59,12 @@ public class RedBlackTreeMain
 
 		// Affichage par niveaux
 		tree.printTreeLevelOrder();
-
+*/
 
 		// Comparer les hauteurs des 2 arbres
 		System.out.println();
 		System.out.println("Hauteur de l'arbre bianire est : " + t.getHauteur());
 		System.out.println("Hauteur de l'arbre rouge-noir est : " + tree.getHauteur() + "\n");
-*/
+
 	}
 }
