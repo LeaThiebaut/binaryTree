@@ -136,8 +136,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase2( RBNode<T> X )
 	{
-		System.out.println("YAYAY");
-		// A MODIFIER/COMPLÉTER
+		if(X.parent.isBlack())
+		{
+			System.out.println("YAYAY");
+			return;
+		}
 		insertionCase3( X );
 	}
 
