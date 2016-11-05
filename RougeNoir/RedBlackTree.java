@@ -125,6 +125,7 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase1 ( RBNode<T> X )
 	{
+		//Cas racine + sortie
 		if(root==X)
 		{
 			root.setToBlack();
@@ -136,9 +137,9 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase2( RBNode<T> X )
 	{
+		//Cas aucun cgt + sortie
 		if(X.parent.isBlack())
 		{
-			System.out.println("YAYAY");
 			return;
 		}
 		insertionCase3( X );
@@ -146,6 +147,7 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase3( RBNode<T> X )
 	{
+		//Cas cgt de couleur + passage a la suite
 		if(X.parent.isRed()&&X.uncle().isRed())
 		{
 			X.grandParent().setToRed();
@@ -158,50 +160,76 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase4( RBNode<T> X )
 	{
+		//cas parent/uncle rouge/noir --> traitement cas 4 ou cas 5
 		if(X.parent.isRed()&&X.uncle().isBlack())
 		{
 			if(X==X.parent.leftChild&&X.parent==X.grandParent().rightChild)
 			{
+				//Stock du parent
 				RBNode<T> tmp = X.parent;
+				//grand parent prend le petit fils en tant que fils
+				X.grandParent().rightChild=X;
 				X.parent=X.grandParent();
+				//Parent recup fils du fils et devient fils de l'ancien fils
 				tmp.leftChild=X.rightChild;
 				X.rightChild=tmp;
+				//Verif cas 5 sur le new fils
 				insertionCase5(X.rightChild);
 			}
 			else if(X==X.parent.rightChild&&X.parent==X.grandParent().leftChild)
 			{
+				System.out.println("Y44444444444444AYAY");
 				RBNode<T> tmp = X.parent;
+				X.grandParent().leftChild=X;
 				X.parent=X.grandParent();
 				tmp.rightChild=X.leftChild;
 				X.leftChild=tmp;
+				X.leftChild.parent=X;
 				insertionCase5(X.leftChild);
 			}
+			//Si pas cas 4 mais rentre dans uncle/parent rouge/noir alors cas 5
 			else
 				insertionCase5(X);
 		}
-		else
-			insertionCase5( X );
 	}
 
 	private void insertionCase5( RBNode<T> X )
 	{
 		if(X.parent.isRed()&&X.uncle().isBlack())
 		{
-			if(X==X.parent.leftChild&&X.parent==X.grandParent().rightChild)
+			if(X==X.parent.rightChild&&X.parent==X.grandParent().rightChild)
 			{
-				RBNode<T> tmp = X.parent;
-				X.parent=X.grandParent();
-				tmp.leftChild=X.rightChild;
-				X.rightChild=tmp;
-				insertionCase5(X.rightChild);
+				//Cgt Couleur
+				X.grandParent().setToRed();
+				X.parent.setToBlack();
+				//Modification sur le parent du grand parent : son fils (gauche/droit selon ou il etait avant) devient le parent de notre noeud
+				if(X.grandParent().parent.rightChild==X.grandParent())
+					X.grandParent().parent.rightChild= X.parent;
+				else
+					X.grandParent().parent.leftChild=X.parent;
+				//Le grand parent recupere le fils du parent
+				X.grandParent().rightChild=X.parent.leftChild;
+				//Le parent devient grand parent 
+				X.grandParent().parent=X.parent;
+				X.parent.leftChild=X.grandParent();
+				X.parent.parent=X.grandParent().parent;
 			}
-			else if(X==X.parent.rightChild&&X.parent==X.grandParent().leftChild)
+			else if(X==X.parent.leftChild&&X.parent==X.grandParent().leftChild)
 			{
-				RBNode<T> tmp = X.parent;
-				X.parent=X.grandParent();
-				tmp.rightChild=X.leftChild;
-				X.leftChild=tmp;
-				insertionCase5(X.leftChild);
+
+				X.grandParent().setToRed();
+				X.parent.setToBlack();
+
+				if(X.grandParent().parent.rightChild==X.grandParent())
+					X.grandParent().parent.rightChild= X.parent;
+				else
+					X.grandParent().parent.leftChild=X.parent;
+				
+				X.grandParent().leftChild=X.parent.rightChild;
+				X.grandParent().parent=X.parent;
+				X.parent.rightChild=X.grandParent();
+				X.parent.parent=X.grandParent().parent;
+				
 			}
 		}
 		return; 

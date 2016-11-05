@@ -7,7 +7,7 @@ public class RedBlackTreeMain
 	public static void main(String[] args)
 	{
 		// Valeurs a inserer dans l'arbre
-		int val[] = {56, 72, 31, 61, 69, 20, 46};
+		int val[] = {56, 72, 31, 61, 69, 20, 46};//, 13, 12};
 
 		// Création de l'arbre binaire
 		Tree<Integer> t = new Tree<Integer>();
