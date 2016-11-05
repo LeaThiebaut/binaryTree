@@ -146,19 +146,64 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase3( RBNode<T> X )
 	{
-		// A MODIFIER/COMPLÉTER
+		if(X.parent.isRed()&&X.uncle().isRed())
+		{
+			X.grandParent().setToRed();
+			X.parent.setToBlack();
+			X.uncle().setToBlack();
+			insertionCase1(X.grandParent());
+		}
 		insertionCase4( X );
 	}
 
 	private void insertionCase4( RBNode<T> X )
 	{
-		// A MODIFIER/COMPLÉTER
-		insertionCase5( X );
+		if(X.parent.isRed()&&X.uncle().isBlack())
+		{
+			if(X==X.parent.leftChild&&X.parent==X.grandParent().rightChild)
+			{
+				RBNode<T> tmp = X.parent;
+				X.parent=X.grandParent();
+				tmp.leftChild=X.rightChild;
+				X.rightChild=tmp;
+				insertionCase5(X.rightChild);
+			}
+			else if(X==X.parent.rightChild&&X.parent==X.grandParent().leftChild)
+			{
+				RBNode<T> tmp = X.parent;
+				X.parent=X.grandParent();
+				tmp.rightChild=X.leftChild;
+				X.leftChild=tmp;
+				insertionCase5(X.leftChild);
+			}
+			else
+				insertionCase5(X);
+		}
+		else
+			insertionCase5( X );
 	}
 
 	private void insertionCase5( RBNode<T> X )
 	{
-		// A MODIFIER/COMPLÉTER
+		if(X.parent.isRed()&&X.uncle().isBlack())
+		{
+			if(X==X.parent.leftChild&&X.parent==X.grandParent().rightChild)
+			{
+				RBNode<T> tmp = X.parent;
+				X.parent=X.grandParent();
+				tmp.leftChild=X.rightChild;
+				X.rightChild=tmp;
+				insertionCase5(X.rightChild);
+			}
+			else if(X==X.parent.rightChild&&X.parent==X.grandParent().leftChild)
+			{
+				RBNode<T> tmp = X.parent;
+				X.parent=X.grandParent();
+				tmp.rightChild=X.leftChild;
+				X.leftChild=tmp;
+				insertionCase5(X.leftChild);
+			}
+		}
 		return; 
 	}
 
