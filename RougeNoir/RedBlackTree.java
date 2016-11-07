@@ -306,11 +306,15 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreePreOrder( RBNode<T> P )
 	{
-	    if (P.value != null) {
-	    	 System.out.print("{"+P.toString()+"}, ");
-	    			printTreePreOrder(P.leftChild);
-	    		printTreePreOrder(P.rightChild);
-		    }
+		if (P.value != null) {
+			System.out.print("{"+P.toString()+"}");
+			if(P.leftChild.value!=null)
+				System.out.print(" ,");	
+			printTreePreOrder(P.leftChild);
+			if(P.rightChild.value!=null)
+				System.out.print(" ,");	
+			printTreePreOrder(P.rightChild);
+		}
 	}
 
 	public void printTreePostOrder()
@@ -321,18 +325,22 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		{
 			System.out.print( "PostOrdre ( ");
 			printTreePostOrder( root );
-			System.out.println( ")");
+			System.out.println( " )");
 		}
 		return;
 	}
 
 	private void printTreePostOrder( RBNode<T> P )
 	{
-	    if (P.value != null) {
-	    		printTreePostOrder(P.leftChild);
-	    		printTreePostOrder(P.rightChild);
-	    		System.out.print("{"+P.toString()+"}, ");
-		    }
+		if (P.value != null) {
+			printTreePostOrder(P.leftChild);
+			if(P.leftChild.value!=null)
+				System.out.print(" ,");		
+			printTreePostOrder(P.rightChild);
+			if(P.rightChild.value!=null)
+				System.out.print(" ,");	
+			System.out.print("{"+P.toString()+"}");
+		}
 	}
 
 
@@ -351,8 +359,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreeAscendingOrder( RBNode<T> P )
 	{
-		// A COMPLÉTER
-
+		if (P.value != null) {
+			printTreeAscendingOrder(P.leftChild);
+			System.out.print("{"+P.toString()+"}, ");
+			printTreeAscendingOrder(P.rightChild);
+		} 
 	}
 
 
@@ -371,8 +382,7 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreeDescendingOrder( RBNode<T> P )
 	{
-		// A COMPLÉTER
-
+		//A COMPLETER
 	}
 
 	public void printTreeLevelOrder()
@@ -387,8 +397,16 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 			q.add(root);
 
-			//  À COMPLÉTER
-
+			while (!q.isEmpty()) {
+				System.out.print("{"+q.peek().toString()+"}");
+				if(q.peek().leftChild.value!=null)
+					q.add(q.peek().leftChild);
+				if(q.peek().rightChild.value!=null)
+					q.add(q.peek().rightChild);
+			    q.remove();
+			    if(!q.isEmpty())
+			    	System.out.print(", ");
+			  }
 			System.out.println( " )");
 		}
 		return;
