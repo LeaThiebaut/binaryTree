@@ -306,8 +306,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreePreOrder( RBNode<T> P )
 	{
-		// A MODIFIER/COMPLÉTER
-		return; 
+	    if (P.value != null) {
+	    	 System.out.print("{"+P.toString()+"}, ");
+	    			printTreePreOrder(P.leftChild);
+	    		printTreePreOrder(P.rightChild);
+		    }
 	}
 
 	public void printTreePostOrder()
@@ -325,8 +328,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreePostOrder( RBNode<T> P )
 	{
-		// A MODIFIER/COMPLÉTER
-		return; 
+	    if (P.value != null) {
+	    		printTreePostOrder(P.leftChild);
+	    		printTreePostOrder(P.rightChild);
+	    		System.out.print("{"+P.toString()+"}, ");
+		    }
 	}
 
 
