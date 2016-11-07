@@ -382,9 +382,53 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreeDescendingOrder( RBNode<T> P )
 	{
-		//A COMPLETER
+		Queue<RBNode<T>> q = new LinkedList<RBNode<T>>();
+
+		int max=0;
+		
+		//On fait une liste de tous nos noeuds
+		addList(root,q);
+		//max = getMax(P,max);
+		
+		while (!q.isEmpty()){
+			max=0;
+			//Cherche le  max en parcourant les noeuds
+			for (RBNode<T> temp : q) {
+				if((int)temp.value>max)
+					max=(int)temp.value;
+			}
+			//Affiche le noeud contenant notre valeur max et on le supprime
+			for (RBNode<T> temp : q) {
+				if((int)temp.value==max){
+					System.out.print("{"+temp.toString()+"}, ");
+					q.remove(temp);
+					break;
+				}
+			}
+		}
 	}
 
+	private Queue<RBNode<T>> addList( RBNode<T> P, Queue<RBNode<T>> q){
+		if (P.value != null) {
+			q.add(P);
+			if(P.leftChild.value!=null)
+				q=addList(P.leftChild,q);
+			if(P.rightChild.value!=null)
+				q=addList(P.rightChild,q);
+		} 
+		return q;
+	}
+	
+	private int getMax( RBNode<T> P, int max){
+		if (P.value != null) {
+			if((int)P.value>max)		
+				max=(int) P.value;
+			max=getMax(P.leftChild,max);
+			max=getMax(P.rightChild,max);
+		} 
+		return max;
+	}
+	
 	public void printTreeLevelOrder()
 	{
 		if(root == null)
