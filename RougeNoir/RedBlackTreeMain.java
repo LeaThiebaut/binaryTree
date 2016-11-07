@@ -7,7 +7,7 @@ public class RedBlackTreeMain
 	public static void main(String[] args)
 	{
 		// Valeurs a inserer dans l'arbre
-		int val[] = {56, 72, 31, 61, 69, 20, 46};//, 13, 12};
+		int val[] = {56, 72, 31, 61, 69, 20, 46};
 
 		// Création de l'arbre binaire
 		Tree<Integer> t = new Tree<Integer>();
@@ -15,8 +15,8 @@ public class RedBlackTreeMain
 		for(int i=0; i<val.length; i++)
 		{
 			t.insert(val[i]);
-			System.out.println(t.getHauteur());
 		}
+
 		// Afficher l'arbre binaire
 		System.out.println("PreOrdre Arbre de recherche binaire :( " + t.printTreePreOrder()+ "\n");
 
@@ -50,7 +50,7 @@ public class RedBlackTreeMain
 			System.out.println("Noeud introuvable.");
 
 		System.out.println();
-		/*
+
 		// Affichage pre-ordre et post-ordre
 		tree.printTreePreOrder();
 		tree.printTreePostOrder();
@@ -59,7 +59,7 @@ public class RedBlackTreeMain
 
 		// Affichage par niveaux
 		tree.printTreeLevelOrder();
-*/
+
 
 		// Comparer les hauteurs des 2 arbres
 		System.out.println();
